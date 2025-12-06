@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trade-credit-backend
+    ports:
+      - "3002:3002"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/trade-credit-score
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - JWT_SECRET=supersecretkey
+      - PORT=3002
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - mongo
+      - redis
+    command: npm run start:dev
+
+  mongo:
+    image: mongo:6
+    container_name: trade-credit-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:alpine
+    container_name: trade-credit-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongo_data:

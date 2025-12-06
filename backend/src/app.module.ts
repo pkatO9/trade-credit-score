@@ -9,6 +9,8 @@ import { PaymentsModule } from './payments/payments.module';
 import { JobsModule } from './jobs/jobs.module';
 import { RemindersModule } from './reminders/reminders.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { LoggerModule } from './logger/logger.module';
+import { TestModule } from './test/test.module';
 import { BullModule } from '@nestjs/bull';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,6 +18,7 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    LoggerModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -37,6 +40,7 @@ import { AppService } from './app.service';
     JobsModule,
     RemindersModule,
     NotificationsModule,
+    TestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

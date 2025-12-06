@@ -95,3 +95,17 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+
+### To start with emulator run:
+cd mobile
+npx expo start
+
+
+cd backend
+docker-compose -f docker-compose.dev.yml up -d
+
+
+cd backend
+npm run start:dev

@@ -39,14 +39,17 @@ export class InvoicesService {
     }
 
     async findAll(sellerId: string): Promise<Invoice[]> {
-        return this.invoiceModel.find({ sellerId: new Types.ObjectId(sellerId) }).exec();
+        return this.invoiceModel
+            .find({ sellerId: new Types.ObjectId(sellerId) })
+            .populate('buyerId', 'name')
+            .exec();
     }
 
     async findOne(id: string, sellerId: string): Promise<InvoiceDocument> {
         const invoice = await this.invoiceModel.findOne({
             _id: id,
             sellerId: new Types.ObjectId(sellerId),
-        }).exec();
+        }).populate('buyerId', 'name').exec();
 
         if (!invoice) {
             throw new NotFoundException(`Invoice #${id} not found`);

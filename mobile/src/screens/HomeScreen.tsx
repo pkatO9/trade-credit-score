@@ -4,7 +4,12 @@ import { useAuth } from '../context/AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import client from '../api/client';
 
-export default function HomeScreen() {
+import { RootStackParamList } from '../types/navigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+export default function HomeScreen({ navigation }: Props) {
     const { logout } = useAuth();
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -46,13 +51,16 @@ export default function HomeScreen() {
 
                 <View style={styles.actions}>
                     <View style={styles.actionButton}>
-                        <Button title="Create Invoice" onPress={() => { }} />
+                        <Button title="Create Invoice" onPress={() => navigation.navigate('CreateInvoice')} />
                     </View>
                     <View style={styles.actionButton}>
-                        <Button title="My Contacts" onPress={() => { }} />
+                        <Button title="My Contacts" onPress={() => navigation.navigate('Contacts')} />
                     </View>
                     <View style={styles.actionButton}>
-                        <Button title="Pending Invoices" onPress={() => { }} color="orange" />
+                        <Button title="Pending Invoices" onPress={() => navigation.navigate('PendingInvoices')} color="orange" />
+                    </View>
+                    <View style={styles.actionButton}>
+                        <Button title="Notifications" onPress={() => navigation.navigate('Notifications')} color="#007bff" />
                     </View>
                 </View>
             </View>
