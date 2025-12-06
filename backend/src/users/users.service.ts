@@ -15,4 +15,10 @@ export class UsersService {
     async findByPhone(phone: string): Promise<User | null> {
         return this.userModel.findOne({ phone }).exec();
     }
+
+    async update(id: string, updateUserDto: any): Promise<User | null> {
+        return this.userModel
+            .findByIdAndUpdate(id, updateUserDto, { new: true })
+            .exec();
+    }
 }
